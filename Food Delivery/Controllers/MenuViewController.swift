@@ -12,6 +12,7 @@ class MenuViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.allowsMultipleSelection = true
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
         collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: FoodCategoryCell.ceilIdentifier)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdenfitier)
@@ -39,6 +40,9 @@ extension MenuViewController {
                 return MenuViewLayout.shared.promosLayout()
             }
         }
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 0
+        layout.configuration = config
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
 }
@@ -55,7 +59,7 @@ extension MenuViewController {
         case 1:
             return FoodCategoryModel.mockData.count
         case 2:
-            return MenuItemModel.mockData.count
+            return 10
         default:
             return 1
         }
@@ -73,7 +77,7 @@ extension MenuViewController {
             return cell
         case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdenfitier, for: indexPath) as? MenuCollectionViewCell else {fatalError("Unable to deque cell.")}
-            cell.cellData = MenuItemModel.mockData[indexPath.row]
+            cell.cellData = MenuItemModel.mockData[0]
             return cell
         default:
             return UICollectionViewCell()
@@ -81,23 +85,53 @@ extension MenuViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        if kind == "header" {
-//            switch indexPath.section {
-//            default:
-//                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-//                                                                             withReuseIdentifier: MenuHeader.menuHeaderIdentifier,
-//                                                                             for: indexPath) as! MenuHeader
-//                header.label.text = "Category 1"
-//
-//                return header
-//            }
-//        }
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                      withReuseIdentifier: MenuHeader.menuHeaderIdentifier,
                                                                      for: indexPath) as! MenuHeader
         header.label.text = "Category 1"
         
         return header
+    }
+}
+
+extension MenuViewController {
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 {
+            deselectAllItems(in: 1)
+        }
+        return true
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.section == 2 {
+            let cell = collectionView.cellForItem(at: indexPath)
+            UIView.animate(withDuration: 0.2) {
+                cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            }
+            cell?.isSelected = false
+        }
+        
+    }
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let cell = collectionView.cellForItem(at: indexPath)
+            UIView.animate(withDuration: 0.2) {
+                cell?.transform = .identity
+            }
+        }
+    }
+}
+
+extension MenuViewController {
+    func deselectAllItems(in section: Int) {
+        let selectedItems = collectionView.indexPathsForSelectedItems ?? []
+        
+        for item in selectedItems {
+            if item.section == section {
+                collectionView.deselectItem(at: item, animated: true)
+            }
+        }
     }
 }
 

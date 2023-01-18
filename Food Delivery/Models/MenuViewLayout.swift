@@ -72,7 +72,6 @@ extension MenuViewLayout {
         
         let section = NSCollectionLayoutSection(group: group)
 
-        let screenWidth = UIScreen.main.bounds.width
         section.contentInsets = NSDirectionalEdgeInsets(top: 0,leading: 10,bottom: 0,trailing: 10)
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -80,6 +79,7 @@ extension MenuViewLayout {
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                  elementKind: "header",
                                                                  alignment: .top)
+        header.pinToVisibleBounds = true
         
         section.boundarySupplementaryItems = [header]
 

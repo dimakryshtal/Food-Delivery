@@ -28,6 +28,7 @@ class MenuHeader: UICollectionViewCell {
     }
     
     func configure() {
+        contentView.backgroundColor = UIColor(named: K.BrandColors.mainColor)
         contentView.addSubview(label)
     }
     
