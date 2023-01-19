@@ -7,10 +7,10 @@
 
 import UIKit
 
-enum Section {
+enum Section: Hashable {
     case promo
     case category
-    case menu
+    case menu(foodType: FoodTypes)
 }
 
 final class MenuViewLayout {

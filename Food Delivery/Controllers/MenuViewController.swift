@@ -13,7 +13,7 @@ class MenuViewController: UICollectionViewController {
     
     private lazy var dataSource = makeDataSource()
     
-    var selectedCategoryItem = 0
+    var selectedCategoryItem: FoodTypes?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,19 +73,19 @@ extension MenuViewController {
             }
             return nil
         }
-        
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
             
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                          withReuseIdentifier: MenuHeader.menuHeaderIdentifier,
                                                                          for: indexPath) as! MenuHeader
-        
-            let selectedCategory = dataSource.snapshot(for: .category).items[self.selectedCategoryItem] as! FoodCategoryModel
+            
+            let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
 
-            header.label.text = selectedCategory.categoryName
-            
+            if case let .menu(foodType) = section {
+                header.label.text = foodType.rawValue
+            }
             return header
-            
+
         }
         
         return dataSource
@@ -97,12 +97,21 @@ extension MenuViewController {
         
         var snapshot = Snapshot()
         
-        snapshot.appendSections([.promo, .category, .menu])
+        snapshot.appendSections([.promo, .category])
         
         snapshot.appendItems(PromoModel.mockData, toSection: .promo)
         snapshot.appendItems(FoodCategoryModel.mockData, toSection: .category)
-        snapshot.appendItems(MenuItemModel.mockData, toSection: .menu)
         
+        
+        if let selectedCategoryItem {
+            var currentData = MenuItemModel.mockData.filter { menuItem in
+                menuItem.type == selectedCategoryItem
+            }
+            
+            
+            snapshot.appendSections([.menu(foodType: selectedCategoryItem)])
+            snapshot.appendItems(currentData, toSection: .menu(foodType: selectedCategoryItem))
+        }
         dataSource.apply(snapshot)
     }
 }
@@ -121,14 +130,11 @@ extension MenuViewController {
         }
         return true
     }
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let selectedIndexPath = IndexPath(item: 0, section: 1)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
-    }
+    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            selectedCategoryItem = indexPath.item
+            selectedCategoryItem = (dataSource.snapshot(for: .category).items[indexPath.item] as! FoodCategoryModel).categoryName
             
             applySnapshot()
         }

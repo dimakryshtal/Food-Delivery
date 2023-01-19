@@ -14,7 +14,7 @@ class FoodCategoryCell: UICollectionViewCell {
         didSet {
             guard let cellData = cellData else {return}
             cellImage.image = UIImage(named: cellData.categoryImage)
-            categoryLabel.text = cellData.categoryName
+            categoryLabel.text = cellData.categoryName.rawValue
         }
     }
     
