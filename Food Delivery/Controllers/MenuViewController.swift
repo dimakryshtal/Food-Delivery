@@ -102,24 +102,11 @@ extension MenuViewController {
         }
         return true
     }
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if indexPath.section == 2 {
-            let cell = collectionView.cellForItem(at: indexPath)
-            UIView.animate(withDuration: 0.2) {
-                cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            }
-            cell?.isSelected = false
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 {
+            return false
         }
-        
-    }
-    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
-            let cell = collectionView.cellForItem(at: indexPath)
-            UIView.animate(withDuration: 0.2) {
-                cell?.transform = .identity
-            }
-        }
+        return true
     }
 }
 
