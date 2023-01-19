@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct PromoModel {
+struct PromoModel: Hashable {
     var image: String
 }
 
 extension PromoModel {
     static var mockData = [
-        PromoModel(image: "beef-burger"),
         PromoModel(image: "beef-burger")
     ]
 }

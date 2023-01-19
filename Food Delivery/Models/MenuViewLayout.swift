@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum Section {
+    case promo
+    case category
+    case menu
+}
+
 final class MenuViewLayout {
     static let shared = MenuViewLayout()
 }
@@ -77,7 +83,7 @@ extension MenuViewLayout {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                             heightDimension: .absolute(30))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
-                                                                 elementKind: "header",
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
                                                                  alignment: .top)
         header.pinToVisibleBounds = true
         

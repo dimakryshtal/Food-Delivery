@@ -8,7 +8,13 @@
 import UIKit
 
 class MenuViewController: UICollectionViewController {
-
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
+    
+    private lazy var dataSource = makeDataSource()
+    
+    var selectedCategoryItem = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,13 +22,14 @@ class MenuViewController: UICollectionViewController {
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
         collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: FoodCategoryCell.ceilIdentifier)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdenfitier)
-        collectionView.register(MenuHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: MenuHeader.menuHeaderIdentifier)
+        collectionView.register(MenuHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MenuHeader.menuHeaderIdentifier)
         
         setLayout()
+        applySnapshot()
         
     }
-
-
+    
+    
     
 }
 
@@ -48,49 +55,55 @@ extension MenuViewController {
 }
 
 extension MenuViewController {
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return PromoModel.mockData.count
-        case 1:
-            return FoodCategoryModel.mockData.count
-        case 2:
-            return 10
-        default:
-            return 1
+    private func makeDataSource() -> DataSource{
+        let dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            if let promo = item as? PromoModel {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromoCollectionViewCell.cellIdentifier, for: indexPath) as? PromoCollectionViewCell
+                cell?.cellData = promo
+                return cell
+            } else if let category = item as? FoodCategoryModel {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCell.ceilIdentifier, for: indexPath) as? FoodCategoryCell
+                cell?.cellData = category
+                return cell
+            } else if let menu = item as? MenuItemModel {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdenfitier, for: indexPath) as? MenuCollectionViewCell
+                cell?.cellData = menu
+                return cell
+            }
+            return nil
         }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromoCollectionViewCell.cellIdentifier, for: indexPath) as? PromoCollectionViewCell else {fatalError("Unable to deque cell.")}
-            cell.cellData = PromoModel.mockData[indexPath.row]
-            return cell
-        case 1:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCell.ceilIdentifier, for: indexPath) as? FoodCategoryCell else {fatalError("Unable to deque cell.")}
-            cell.cellData = FoodCategoryModel.mockData[indexPath.row]
-            return cell
-        case 2:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdenfitier, for: indexPath) as? MenuCollectionViewCell else {fatalError("Unable to deque cell.")}
-            cell.cellData = MenuItemModel.mockData[0]
-            return cell
-        default:
-            return UICollectionViewCell()
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                     withReuseIdentifier: MenuHeader.menuHeaderIdentifier,
-                                                                     for: indexPath) as! MenuHeader
-        header.label.text = "Category 1"
         
-        return header
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                         withReuseIdentifier: MenuHeader.menuHeaderIdentifier,
+                                                                         for: indexPath) as! MenuHeader
+        
+            let selectedCategory = dataSource.snapshot(for: .category).items[self.selectedCategoryItem] as! FoodCategoryModel
+
+            header.label.text = selectedCategory.categoryName
+            
+            return header
+            
+        }
+        
+        return dataSource
+    }
+    
+    
+    
+    func applySnapshot(animatingDifferences: Bool = true) {
+        
+        var snapshot = Snapshot()
+        
+        snapshot.appendSections([.promo, .category, .menu])
+        
+        snapshot.appendItems(PromoModel.mockData, toSection: .promo)
+        snapshot.appendItems(FoodCategoryModel.mockData, toSection: .category)
+        snapshot.appendItems(MenuItemModel.mockData, toSection: .menu)
+        
+        dataSource.apply(snapshot)
     }
 }
 
@@ -107,6 +120,18 @@ extension MenuViewController {
             return false
         }
         return true
+    }
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let selectedIndexPath = IndexPath(item: 0, section: 1)
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            selectedCategoryItem = indexPath.item
+            
+            applySnapshot()
+        }
     }
 }
 

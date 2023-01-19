@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FoodCategoryModel {
+struct FoodCategoryModel: Hashable {
     let categoryName: String
     let categoryImage: String
 }
