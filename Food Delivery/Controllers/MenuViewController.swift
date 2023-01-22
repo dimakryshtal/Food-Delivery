@@ -7,7 +7,12 @@
 
 import UIKit
 
-class MenuViewController: UICollectionViewController {
+class MenuViewController: UIViewController {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var cartButton: UIButton!
+    
     typealias DataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
     
@@ -18,6 +23,7 @@ class MenuViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
         collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: FoodCategoryCell.ceilIdentifier)
@@ -27,12 +33,20 @@ class MenuViewController: UICollectionViewController {
         setLayout()
         applySnapshot()
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true
     }
     
     
     
 }
 
+//MARK: - Seting Layout
 extension MenuViewController {
     func setLayout() {
         let layout = UICollectionViewCompositionalLayout{ sectionIndex, environment in
@@ -47,13 +61,12 @@ extension MenuViewController {
                 return MenuViewLayout.shared.promosLayout()
             }
         }
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 0
-        layout.configuration = config
+
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
 }
 
+//MARK: - DataSource and Snapshot
 extension MenuViewController {
     
     private func makeDataSource() -> DataSource{
@@ -80,12 +93,12 @@ extension MenuViewController {
                                                                          for: indexPath) as! MenuHeader
             
             let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
-
+            
             if case let .menu(foodType) = section {
                 header.label.text = foodType.rawValue
             }
             return header
-
+            
         }
         
         return dataSource
@@ -104,7 +117,7 @@ extension MenuViewController {
         
         
         if let selectedCategoryItem {
-            var currentData = MenuItemModel.mockData.filter { menuItem in
+            let currentData = MenuItemModel.mockData.filter { menuItem in
                 menuItem.type == selectedCategoryItem
             }
             
@@ -116,27 +129,29 @@ extension MenuViewController {
     }
 }
 
-extension MenuViewController {
-    
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//MARK: - Delegate
+extension MenuViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 1 {
             deselectAllItems(in: 1)
         }
         return true
     }
-    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 1 {
             return false
         }
         return true
     }
     
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             selectedCategoryItem = (dataSource.snapshot(for: .category).items[indexPath.item] as! FoodCategoryModel).categoryName
             
             applySnapshot()
+        } else if indexPath.section == 2 {
+            self.performSegue(withIdentifier: "foodDetails", sender: collectionView.cellForItem(at: indexPath))
+            deselectAllItems(in: 2)
         }
     }
 }
@@ -149,6 +164,29 @@ extension MenuViewController {
             if item.section == section {
                 collectionView.deselectItem(at: item, animated: true)
             }
+        }
+    }
+}
+
+
+//MARK: - Segues
+extension MenuViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "foodDetails" {
+            guard let vc = segue.destination as? FoodDetailsViewController else {
+                fatalError("Cannot typecast to FoodDetailsViewControlles")
+            }
+            
+            guard let cell = sender as? MenuCollectionViewCell else {
+                fatalError("Cannot typecast to MenuCollectionViewCell")
+            }
+            var cellData = cell.cellData
+            
+
+            
+            vc.label = cellData?.title ?? ""
+            vc.ingredients = cellData?.description ?? ""
+            vc.image = UIImage(named: cellData?.img ?? "")
         }
     }
 }

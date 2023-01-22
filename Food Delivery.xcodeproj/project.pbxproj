@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C603A5A6297C0EF100F53058 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603A5A5297C0EF100F53058 /* OrderViewController.swift */; };
 		C604BDC82971C779005A1709 /* PromoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604BDC72971C779005A1709 /* PromoModel.swift */; };
 		C63D2FEF2976D12900EDEEA4 /* MenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D2FEE2976D12900EDEEA4 /* MenuHeader.swift */; };
 		C68D42EF2971ABB300FB7A9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D42EE2971ABB300FB7A9D /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 		C68F0C5B29746D5F007A0F3A /* MenuItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68F0C5A29746D5F007A0F3A /* MenuItemModel.swift */; };
 		C6929FB62971BE24008A0080 /* PromoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6929FB52971BE24008A0080 /* PromoCollectionViewCell.swift */; };
 		C696421C2971C15C008C3FED /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696421B2971C15C008C3FED /* UIView + Extension.swift */; };
+		C6AD59BF297D50780051B5DA /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AD59BE297D50780051B5DA /* FoodDetailsViewController.swift */; };
 		C6B7FF8729759D51001728AE /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B7FF8629759D51001728AE /* K.swift */; };
 		C6B8475029741B2200613C1E /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B8474F29741B2200613C1E /* UIImageView + Extension.swift */; };
 		C6C5CCFF2971B5070091E84E /* MenuViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C5CCFE2971B5070091E84E /* MenuViewLayout.swift */; };
@@ -27,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C603A5A5297C0EF100F53058 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		C604BDC72971C779005A1709 /* PromoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoModel.swift; sourceTree = "<group>"; };
 		C63D2FEE2976D12900EDEEA4 /* MenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeader.swift; sourceTree = "<group>"; };
 		C68D42EB2971ABB300FB7A9D /* Food Delivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Delivery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +44,7 @@
 		C68F0C5A29746D5F007A0F3A /* MenuItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemModel.swift; sourceTree = "<group>"; };
 		C6929FB52971BE24008A0080 /* PromoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C696421B2971C15C008C3FED /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
+		C6AD59BE297D50780051B5DA /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
 		C6B7FF8629759D51001728AE /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		C6B8474F29741B2200613C1E /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		C6C5CCFE2971B5070091E84E /* MenuViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewLayout.swift; sourceTree = "<group>"; };
@@ -59,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C603A5A3297C0EB400F53058 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				C6C5CCFE2971B5070091E84E /* MenuViewLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		C63D2FF02976D62400EDEEA4 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +114,7 @@
 		C68D43022971ABBA00FB7A9D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C6C5CCFE2971B5070091E84E /* MenuViewLayout.swift */,
+				C603A5A3297C0EB400F53058 /* Layout */,
 				C604BDC72971C779005A1709 /* PromoModel.swift */,
 				C6CBAECB29733470008164F8 /* FoodCategoryModel.swift */,
 				C68F0C5A29746D5F007A0F3A /* MenuItemModel.swift */,
@@ -114,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				C68D42F22971ABB300FB7A9D /* MenuViewController.swift */,
+				C603A5A5297C0EF100F53058 /* OrderViewController.swift */,
+				C6AD59BE297D50780051B5DA /* FoodDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -226,10 +240,12 @@
 				C6CBAECC29733470008164F8 /* FoodCategoryModel.swift in Sources */,
 				C6B8475029741B2200613C1E /* UIImageView + Extension.swift in Sources */,
 				C6B7FF8729759D51001728AE /* K.swift in Sources */,
+				C6AD59BF297D50780051B5DA /* FoodDetailsViewController.swift in Sources */,
 				C6C5CCFF2971B5070091E84E /* MenuViewLayout.swift in Sources */,
 				C68D42EF2971ABB300FB7A9D /* AppDelegate.swift in Sources */,
 				C68F0C5929746D01007A0F3A /* MenuCollectionViewCell.swift in Sources */,
 				C696421C2971C15C008C3FED /* UIView + Extension.swift in Sources */,
+				C603A5A6297C0EF100F53058 /* OrderViewController.swift in Sources */,
 				C68D42F12971ABB300FB7A9D /* SceneDelegate.swift in Sources */,
 				C6CBAECA2973343F008164F8 /* FoodCategoryCell.swift in Sources */,
 				C68F0C5B29746D5F007A0F3A /* MenuItemModel.swift in Sources */,
