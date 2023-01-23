@@ -120,9 +120,23 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled">
                                                     <attributedString key="attributedTitle">
-                                                        <fragment content="Add to card: $5.00">
+                                                        <fragment content="Add to car">
                                                             <attributes>
-                                                                <font key="NSFont" size="18" name="Helvetica-Bold"/>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" size="18" name="SFPro-Black"/>
+                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment content="t">
+                                                            <attributes>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" size="18" name="SFPro-Black"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment content=": $5.00">
+                                                            <attributes>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" size="18" name="SFPro-Black"/>
                                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                             </attributes>
                                                         </fragment>
