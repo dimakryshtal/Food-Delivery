@@ -217,14 +217,70 @@
                     <view key="view" contentMode="scaleToFill" id="afO-do-edJ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgq-hs-8tz">
+                                <rect key="frame" x="10" y="768" width="373" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="DU3-NH-F9X"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="cart" catalog="system" subtitle="">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Button"/>
+                                    </attributedString>
+                                    <color key="baseBackgroundColor" name="secondaryColor"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="orderTapped:" destination="gMy-ks-KVm" eventType="touchUpInside" id="ZMz-1o-NfM"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="r2C-Hi-9Fc">
+                                <rect key="frame" x="0.0" y="103" width="393" height="660"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VnL-pR-f3C">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ny9-27-r6X">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="utr-vx-yn3">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="85E-ha-Lh8"/>
                         <color key="backgroundColor" name="mainColor"/>
+                        <constraints>
+                            <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="xgq-hs-8tz" secondAttribute="trailing" constant="10" id="SkO-jY-JKA"/>
+                            <constraint firstItem="r2C-Hi-9Fc" firstAttribute="top" secondItem="85E-ha-Lh8" secondAttribute="top" id="TH1-3Y-0bo"/>
+                            <constraint firstItem="xgq-hs-8tz" firstAttribute="bottom" secondItem="85E-ha-Lh8" secondAttribute="bottom" constant="5" id="X6f-fU-qXd"/>
+                            <constraint firstItem="xgq-hs-8tz" firstAttribute="top" secondItem="r2C-Hi-9Fc" secondAttribute="bottom" constant="5" id="cRH-Ge-Gxg"/>
+                            <constraint firstItem="r2C-Hi-9Fc" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" id="rzY-kh-ezW"/>
+                            <constraint firstItem="xgq-hs-8tz" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="sEd-wl-3SX"/>
+                            <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="r2C-Hi-9Fc" secondAttribute="trailing" id="v1g-ek-tu7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Your oder" id="0Ii-l7-sK9"/>
+                    <connections>
+                        <outlet property="collectionView" destination="r2C-Hi-9Fc" id="Nam-Kd-ISG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQu-TJ-SHE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2324" y="51"/>
+            <point key="canvasLocation" x="1473" y="465"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="suX-PZ-pwQ">
