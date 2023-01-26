@@ -53,15 +53,6 @@ class MenuCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    //    override var isHighlighted: Bool {
-    //        didSet {
-    //            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-    //                self.transform = self.isSelected ? CGAffineTransform(scaleX: 0.95, y: 0.95) : CGAffineTransform.identity
-    //            }, completion: nil)
-    //        }
-    //    }
-    
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
