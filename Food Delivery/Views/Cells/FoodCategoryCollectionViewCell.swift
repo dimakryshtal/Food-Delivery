@@ -7,8 +7,10 @@
 
 import UIKit
 
-class FoodCategoryCell: UICollectionViewCell {
-    static let ceilIdentifier = "FoodCategoryCollectionViewCell"
+class FoodCategoryCollectionViewCell: UICollectionViewCell {
+    class var cellIdentifier: String {
+        return "FoodCategoryCollectionViewCell"
+    }
     
     var cellData : FoodCategoryModel? {
         didSet {

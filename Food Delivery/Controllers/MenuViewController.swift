@@ -10,11 +10,7 @@ import UIKit
 class MenuViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var cartButton: UIButton!
-    
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
     
     private lazy var dataSource = makeDataSource()
     
@@ -26,8 +22,8 @@ class MenuViewController: UIViewController {
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
-        collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: FoodCategoryCell.ceilIdentifier)
-        collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdenfitier)
+        collectionView.register(FoodCategoryCollectionViewCell.self, forCellWithReuseIdentifier: FoodCategoryCollectionViewCell.cellIdentifier)
+        collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.cellIdentifier)
         collectionView.register(MenuHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MenuHeader.menuHeaderIdentifier)
         
         setLayout()
@@ -68,6 +64,8 @@ extension MenuViewController {
 
 //MARK: - DataSource and Snapshot
 extension MenuViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<MenuViewLayout.Section, AnyHashable>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<MenuViewLayout.Section, AnyHashable>
     
     private func makeDataSource() -> DataSource{
         let dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -76,11 +74,11 @@ extension MenuViewController {
                 cell?.cellData = promo
                 return cell
             } else if let category = item as? FoodCategoryModel {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCell.ceilIdentifier, for: indexPath) as? FoodCategoryCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCollectionViewCell.cellIdentifier, for: indexPath) as? FoodCategoryCollectionViewCell
                 cell?.cellData = category
                 return cell
             } else if let menu = item as? MenuItemModel {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdenfitier, for: indexPath) as? MenuCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.cellIdentifier, for: indexPath) as? MenuCollectionViewCell
                 cell?.cellData = menu
                 return cell
             }

@@ -8,7 +8,10 @@
 import UIKit
 
 class PromoCollectionViewCell: UICollectionViewCell {
-    static let cellIdentifier = "FoodTopBannerCollectionViewCell"
+    class var cellIdentifier: String {
+        return "FoodTopBannerCollectionViewCell"
+        
+    }
     
     var cellData : PromoModel? {
         didSet {

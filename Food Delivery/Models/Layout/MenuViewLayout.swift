@@ -7,14 +7,14 @@
 
 import UIKit
 
-enum Section: Hashable {
-    case promo
-    case category
-    case menu(foodType: FoodTypes)
-}
 
 final class MenuViewLayout {
     static let shared = MenuViewLayout()
+    enum Section: Hashable {
+        case promo
+        case category
+        case menu(foodType: FoodTypes)
+    }
 }
 
 extension MenuViewLayout {
@@ -72,7 +72,7 @@ extension MenuViewLayout {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(130))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0)
         
         
         
