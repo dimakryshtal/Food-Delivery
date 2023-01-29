@@ -12,9 +12,11 @@ class OrderDishCollectionViewCell: MenuCollectionViewCell {
         return "OrderDishCollectionViewCell"
     }
     
-    
     lazy var minusButton = createButton(with: "-")
     lazy var plusButton = createButton(with: "+")
+    
+    var delegate: OrderDishCellDelegate!
+    var indexPath: IndexPath!
     
     var countLabel: UILabel = {
         var label = UILabel()
@@ -36,6 +38,15 @@ class OrderDishCollectionViewCell: MenuCollectionViewCell {
         
         return label
     }()
+    
+    var orderData: OrderItemModel? {
+        didSet {
+            guard let orderData else { return }
+            cellData = orderData.menuItem
+            countLabel.text = String(orderData.amount)
+            
+        }
+    }
     
     func createButton(with label: String) -> UIButton {
         let b = UIButton()
@@ -119,14 +130,23 @@ class OrderDishCollectionViewCell: MenuCollectionViewCell {
         ])
     }
     
+}
+
+//MARK: - "+" AND "-" buttons
+extension OrderDishCollectionViewCell {
     @objc func plusButtonTapped() {
-        countLabel.text = "\(Int(countLabel.text!)! + 1)"
+        guard let orderData else { return }
+        orderData.amount = orderData.amount + 1
+        countLabel.text = "\(orderData.amount)"
     }
     
     @objc func minusButtonTapped() {
-        guard let text = Int(countLabel.text ?? ""), text > 0 else {
-            return
+        guard let orderData, orderData.amount > 0 else { return }
+        orderData.amount = orderData.amount - 1
+        countLabel.text = "\(orderData.amount)"
+        if orderData.amount == 0 {
+            delegate.removeCell(dish: orderData)
         }
-        countLabel.text = "\(Int(countLabel.text!)! - 1)"
     }
+    
 }

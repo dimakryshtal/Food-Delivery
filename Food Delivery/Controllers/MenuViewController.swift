@@ -7,17 +7,19 @@
 
 import UIKit
 
+
 class MenuViewController: UIViewController {
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var cartButton: UIButton!
     
     private lazy var dataSource = makeDataSource()
     
-    var selectedCategoryItem: FoodTypes?
+    var brain: MenuBrain!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
@@ -29,16 +31,16 @@ class MenuViewController: UIViewController {
         setLayout()
         applySnapshot()
         
+        collectionView.selectItem(at: IndexPath(item: 0, section: 1), animated: false, scrollPosition: [])
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
         navigationController?.isNavigationBarHidden = true
     }
-    
-    
     
 }
 
@@ -82,6 +84,7 @@ extension MenuViewController {
                 cell?.cellData = menu
                 return cell
             }
+            
             return nil
         }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
@@ -110,19 +113,19 @@ extension MenuViewController {
         
         snapshot.appendSections([.promo, .category])
         
-        snapshot.appendItems(PromoModel.mockData, toSection: .promo)
-        snapshot.appendItems(FoodCategoryModel.mockData, toSection: .category)
+        snapshot.appendItems(brain.getPromos(), toSection: .promo)
+        snapshot.appendItems(brain.getCategories(), toSection: .category)
         
         
-        if let selectedCategoryItem {
-            let currentData = MenuItemModel.mockData.filter { menuItem in
-                menuItem.type == selectedCategoryItem
+//        if let selectedCategoryItem = brain.selectedCategoryItem {
+            let currentData = brain.getFoodData().filter { menuItem in
+                menuItem.type == brain.selectedCategoryItem
             }
             
             
-            snapshot.appendSections([.menu(foodType: selectedCategoryItem)])
-            snapshot.appendItems(currentData, toSection: .menu(foodType: selectedCategoryItem))
-        }
+        snapshot.appendSections([.menu(foodType: brain.selectedCategoryItem)])
+        snapshot.appendItems(currentData, toSection: .menu(foodType: brain.selectedCategoryItem))
+//        }
         dataSource.apply(snapshot)
     }
 }
@@ -144,7 +147,7 @@ extension MenuViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            selectedCategoryItem = (dataSource.snapshot(for: .category).items[indexPath.item] as! FoodCategoryModel).categoryName
+            brain.selectedCategoryItem = (dataSource.snapshot(for: .category).items[indexPath.item] as! FoodCategoryModel).categoryName
             
             applySnapshot()
         } else if indexPath.section == 2 {
@@ -175,17 +178,26 @@ extension MenuViewController {
                 fatalError("Cannot typecast to FoodDetailsViewControlles")
             }
             
-            guard let cell = sender as? MenuCollectionViewCell else {
+            guard let cell = sender as? MenuCollectionViewCell, let cellData = cell.cellData else {
                 fatalError("Cannot typecast to MenuCollectionViewCell")
             }
-            var cellData = cell.cellData
             
-
+            vc.cellData = cellData
+            vc.isAlreadyChosen = brain.checkIfOrderContains(dish: cellData)
+            vc.delegate = self
             
-            vc.label = cellData?.title ?? ""
-            vc.ingredients = cellData?.description ?? ""
-            vc.image = UIImage(named: cellData?.img ?? "")
+        } else if segue.identifier == "getOrder" {
+            guard let vc = segue.destination as? OrderViewController else {
+                fatalError("Cannot typecast to OrderViewController")
+            }
+            
+            vc.menuBrain = brain
         }
     }
 }
-
+//MARK: - Chosen dish
+extension MenuViewController: DataSendingDelegate {
+    func sendDataToMenuViewController(data: MenuItemModel) {
+        brain.addToCart(dish: data)
+    }
+}

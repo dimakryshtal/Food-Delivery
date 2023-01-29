@@ -7,15 +7,22 @@
 
 import UIKit
 
-class OrderViewController: UIViewController {
+protocol OrderDishCellDelegate {
+    func removeCell(dish: OrderItemModel)
+}
 
+
+class OrderViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var menuBrain: MenuBrain!
     private lazy var dataSource = makeDataSource()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        print(menuBrain.getCurrentOrder())
 
         collectionView.register(OrderDishCollectionViewCell.self, forCellWithReuseIdentifier: OrderDishCollectionViewCell.cellIdentifier)
         
@@ -61,10 +68,12 @@ extension OrderViewController {
 
     private func makeDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, item in
-            if let menu = item as? MenuItemModel {
+            if let order = item as? OrderItemModel {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderDishCollectionViewCell.cellIdentifier,
                                                               for: indexPath) as? OrderDishCollectionViewCell
-                cell?.cellData = menu
+                cell?.orderData = order
+                cell?.delegate = self
+                cell?.indexPath = indexPath
                 return cell
             }
             return nil
@@ -74,14 +83,25 @@ extension OrderViewController {
     
     func applySnapshot(animatingDifferences: Bool = true) {
         
+        
+        
         var snapshot = Snapshot()
         
         snapshot.appendSections([.chosenDishes])
 
-        snapshot.appendItems(MenuItemModel.mockData, toSection: .chosenDishes)
+        snapshot.appendItems(Array(menuBrain.getCurrentOrder()), toSection: .chosenDishes)
         
         
         dataSource.apply(snapshot)
        
+    }
+}
+
+extension OrderViewController: OrderDishCellDelegate {
+    func removeCell(dish: OrderItemModel) {
+        menuBrain.removeFromCart(dish: dish)
+        print(menuBrain.getCurrentOrder())
+        applySnapshot()
+        
     }
 }
