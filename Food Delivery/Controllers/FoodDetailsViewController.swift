@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol DataSendingDelegate {
-    func sendDataToMenuViewController(data: MenuItemModel)
-}
 
 class FoodDetailsViewController: UIViewController {
     @IBOutlet weak var foodImage: UIImageView!
@@ -25,6 +22,11 @@ class FoodDetailsViewController: UIViewController {
     
     var cellData: MenuItemModel!
     var delegate: DataSendingDelegate?
+    
+    deinit {
+        print("OrderViewController deinitialized")
+    }
+    
 
     
     override func viewDidLoad() {

@@ -22,5 +22,10 @@ extension UIView {
         centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = vertically
         
     }
+    func getConstraints(to view: UIView) -> [NSLayoutConstraint] {
+        return constraints.filter { constraint in
+            constraint.firstItem as? UIView == view || constraint.secondItem as? UIView == view
+        }
+    }
     
 }

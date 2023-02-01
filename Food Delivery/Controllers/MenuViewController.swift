@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol DataSendingDelegate {
+    func sendDataToMenuViewController(data: MenuItemModel)
+}
 
 class MenuViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -201,3 +204,5 @@ extension MenuViewController: DataSendingDelegate {
         brain.addToCart(dish: data)
     }
 }
+
+

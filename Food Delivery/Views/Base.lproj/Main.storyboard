@@ -6,7 +6,6 @@
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -213,7 +212,7 @@
             </objects>
             <point key="canvasLocation" x="1473" y="-266"/>
         </scene>
-        <!--Your oder-->
+        <!--Your order-->
         <scene sceneID="P1q-Qf-25g">
             <objects>
                 <viewController id="gMy-ks-KVm" customClass="OrderViewController" customModule="Food_Delivery" customModuleProvider="target" sceneMemberID="viewController">
@@ -243,6 +242,21 @@
                                     <action selector="orderTapped:" destination="gMy-ks-KVm" eventType="touchUpInside" id="ZMz-1o-NfM"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jd6-fk-cmG">
+                                <rect key="frame" x="10" y="722" width="410" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lgR-Ah-gcb"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="r2C-Hi-9Fc">
                                 <rect key="frame" x="0.0" y="103" width="430" height="439"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -263,38 +277,21 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-8K-ul2">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CRv-1B-doO">
                                 <rect key="frame" x="10" y="782" width="410" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="VbQ-uF-yBb"/>
+                                    <constraint firstAttribute="height" constant="50" id="aUW-Xq-gUg"/>
                                 </constraints>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pNJ-M3-g6Y">
-                                <rect key="frame" x="10" y="722" width="410" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bjw-tn-aHe"/>
-                                </constraints>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
+                            </textField>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HN1-tY-x50">
                                 <rect key="frame" x="10" y="552" width="410" height="160"/>
                                 <constraints>
@@ -306,27 +303,30 @@
                         <viewLayoutGuide key="safeArea" id="85E-ha-Lh8"/>
                         <color key="backgroundColor" name="mainColor"/>
                         <constraints>
-                            <constraint firstItem="O7L-8K-ul2" firstAttribute="top" secondItem="pNJ-M3-g6Y" secondAttribute="bottom" constant="10" id="OzJ-22-IgF"/>
+                            <constraint firstItem="xgq-hs-8tz" firstAttribute="top" secondItem="CRv-1B-doO" secondAttribute="bottom" constant="10" id="19w-tf-I22"/>
+                            <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="CRv-1B-doO" secondAttribute="trailing" constant="10" id="1jB-Ol-0pm"/>
+                            <constraint firstItem="CRv-1B-doO" firstAttribute="top" secondItem="jd6-fk-cmG" secondAttribute="bottom" constant="10" id="IXp-qo-oS6"/>
+                            <constraint firstItem="jd6-fk-cmG" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="LWX-CT-b4a"/>
+                            <constraint firstItem="jd6-fk-cmG" firstAttribute="top" secondItem="HN1-tY-x50" secondAttribute="bottom" constant="10" id="RVd-dR-gRk"/>
                             <constraint firstItem="HN1-tY-x50" firstAttribute="top" secondItem="r2C-Hi-9Fc" secondAttribute="bottom" constant="10" id="S49-lm-mGf"/>
                             <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="xgq-hs-8tz" secondAttribute="trailing" constant="10" id="SkO-jY-JKA"/>
                             <constraint firstItem="r2C-Hi-9Fc" firstAttribute="top" secondItem="85E-ha-Lh8" secondAttribute="top" id="TH1-3Y-0bo"/>
-                            <constraint firstItem="xgq-hs-8tz" firstAttribute="top" secondItem="O7L-8K-ul2" secondAttribute="bottom" constant="10" id="UqS-RY-yTB"/>
                             <constraint firstItem="xgq-hs-8tz" firstAttribute="bottom" secondItem="85E-ha-Lh8" secondAttribute="bottom" constant="-1" id="X6f-fU-qXd"/>
-                            <constraint firstItem="pNJ-M3-g6Y" firstAttribute="top" secondItem="HN1-tY-x50" secondAttribute="bottom" constant="10" id="Y71-Wy-Qen"/>
-                            <constraint firstItem="pNJ-M3-g6Y" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="afW-RP-jyM"/>
                             <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="HN1-tY-x50" secondAttribute="trailing" constant="10" id="fmN-rJ-WYi"/>
-                            <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="pNJ-M3-g6Y" secondAttribute="trailing" constant="10" id="jQh-TT-47W"/>
+                            <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="jd6-fk-cmG" secondAttribute="trailing" constant="10" id="k0s-cD-LfW"/>
                             <constraint firstItem="HN1-tY-x50" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="p2V-l0-DBM"/>
-                            <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="O7L-8K-ul2" secondAttribute="trailing" constant="10" id="qqp-Qj-Ihn"/>
                             <constraint firstItem="r2C-Hi-9Fc" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" id="rzY-kh-ezW"/>
                             <constraint firstItem="xgq-hs-8tz" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="sEd-wl-3SX"/>
-                            <constraint firstItem="O7L-8K-ul2" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="uLw-jI-UVo"/>
                             <constraint firstItem="85E-ha-Lh8" firstAttribute="trailing" secondItem="r2C-Hi-9Fc" secondAttribute="trailing" id="v1g-ek-tu7"/>
+                            <constraint firstItem="CRv-1B-doO" firstAttribute="leading" secondItem="85E-ha-Lh8" secondAttribute="leading" constant="10" id="yNf-Pc-VEQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Your oder" id="0Ii-l7-sK9"/>
+                    <navigationItem key="navigationItem" title="Your order" id="0Ii-l7-sK9"/>
                     <connections>
                         <outlet property="collectionView" destination="r2C-Hi-9Fc" id="Nam-Kd-ISG"/>
+                        <outlet property="locationView" destination="jd6-fk-cmG" id="fx0-zG-hJz"/>
+                        <outlet property="mapView" destination="HN1-tY-x50" id="ND8-gu-RV0"/>
+                        <outlet property="nameView" destination="CRv-1B-doO" id="KbF-6J-1WS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQu-TJ-SHE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -365,11 +365,5 @@
         <namedColor name="secondaryColor">
             <color red="1" green="0.44705882352941179" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

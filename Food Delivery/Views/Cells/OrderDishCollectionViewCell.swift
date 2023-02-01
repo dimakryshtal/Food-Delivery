@@ -15,7 +15,7 @@ class OrderDishCollectionViewCell: MenuCollectionViewCell {
     lazy var minusButton = createButton(with: "-")
     lazy var plusButton = createButton(with: "+")
     
-    var delegate: OrderDishCellDelegate!
+    weak var delegate: OrderDishCellDelegate?
     var indexPath: IndexPath!
     
     var countLabel: UILabel = {
@@ -61,12 +61,18 @@ class OrderDishCollectionViewCell: MenuCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        print("Order dish cell created")
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    deinit {
+        print("Order dish cell removed")
+        
+    }
     override func configure() {
         contentView.backgroundColor = UIColor(named: K.BrandColors.secondaryColor)
         plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
@@ -145,7 +151,7 @@ extension OrderDishCollectionViewCell {
         orderData.amount = orderData.amount - 1
         countLabel.text = "\(orderData.amount)"
         if orderData.amount == 0 {
-            delegate.removeCell(dish: orderData)
+            delegate?.removeCell(dish: orderData)
         }
     }
     
