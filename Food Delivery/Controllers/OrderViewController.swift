@@ -21,13 +21,23 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var nameView: UITextField!
     
     weak var menuBrain: MenuBrain!
+    
     var locationManager = CLLocationManager()
     var mapViewOpened = false
     
     var mapViewDefaultConstraints: [NSLayoutConstraint]?
+    var collectionViewHeightConstraint: NSLayoutConstraint? {
+        didSet {
+            if let oldValue {
+                NSLayoutConstraint.deactivate([oldValue])
+            }
+            
+            guard let collectionViewHeightConstraint else { return }
+            NSLayoutConstraint.activate([collectionViewHeightConstraint])
+        }
+    }
     
     private lazy var dataSource = makeDataSource()
-
     
     deinit {
         print("OrderViewController deinitialized")
@@ -45,6 +55,7 @@ class OrderViewController: UIViewController {
         applySnapshot()
         configureMapKit()
         configureTextFields()
+        configureCollectionView()
         addGestures()
     }
     
@@ -53,6 +64,8 @@ class OrderViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = false
     }
+    
+    
 
     
     @IBAction func orderTapped(_ sender: Any) {
@@ -79,8 +92,15 @@ extension OrderViewController {
         nameView.leftView = UIImageView.createImageViewForTextField(with: "person.fill")
     }
     
-
-    
+    func configureCollectionView() {
+        
+        
+        let collectionViewHeight = collectionView.frame.height
+        let newHeight = CGFloat(110 * menuBrain.getCurrentOrder().count)
+        
+        collectionViewHeightConstraint = collectionView.heightAnchor.constraint(equalToConstant:
+                                                                                    newHeight > collectionViewHeight ? collectionViewHeight : newHeight)
+    }
 }
 
 //MARK: - Gestures
@@ -188,6 +208,10 @@ extension OrderViewController: OrderDishCellDelegate {
     func removeCell(dish: OrderItemModel) {
         menuBrain.removeFromCart(dish: dish)
         applySnapshot()
+        configureCollectionView()
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
 

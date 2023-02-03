@@ -22,8 +22,6 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
@@ -40,11 +38,21 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
+                
+
+
         navigationController?.isNavigationBarHidden = true
     }
     
+    @IBAction func cartButtonTapped(_ sender: Any) {
+        guard brain.getCurrentOrder().count != 0 else {
+            let alert = UIAlertController(title: "Alert", message: "Your cart must contain at least one dish.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        performSegue(withIdentifier: "goToOrder", sender: self)
+    }
 }
 
 //MARK: - Seting Layout
@@ -64,6 +72,13 @@ extension MenuViewController {
         }
 
         collectionView.setCollectionViewLayout(layout, animated: true)
+    }
+}
+
+//MARK: - Configure subviews
+extension MenuViewController {
+    func configureCartButton() {
+        cartButton.setTitle("Cart: \(brain.getCurrentOrder().count) items", for: .normal)
     }
 }
 
@@ -111,24 +126,18 @@ extension MenuViewController {
     
     
     func applySnapshot(animatingDifferences: Bool = true) {
-        
         var snapshot = Snapshot()
         
         snapshot.appendSections([.promo, .category])
-        
         snapshot.appendItems(brain.getPromos(), toSection: .promo)
         snapshot.appendItems(brain.getCategories(), toSection: .category)
         
+        let currentData = brain.getFoodData().filter { menuItem in
+            menuItem.type == brain.selectedCategoryItem
+        }
         
-//        if let selectedCategoryItem = brain.selectedCategoryItem {
-            let currentData = brain.getFoodData().filter { menuItem in
-                menuItem.type == brain.selectedCategoryItem
-            }
-            
-            
         snapshot.appendSections([.menu(foodType: brain.selectedCategoryItem)])
         snapshot.appendItems(currentData, toSection: .menu(foodType: brain.selectedCategoryItem))
-//        }
         dataSource.apply(snapshot)
     }
 }
@@ -189,7 +198,7 @@ extension MenuViewController {
             vc.isAlreadyChosen = brain.checkIfOrderContains(dish: cellData)
             vc.delegate = self
             
-        } else if segue.identifier == "getOrder" {
+        } else if segue.identifier == "goToOrder" {
             guard let vc = segue.destination as? OrderViewController else {
                 fatalError("Cannot typecast to OrderViewController")
             }
@@ -202,6 +211,7 @@ extension MenuViewController {
 extension MenuViewController: DataSendingDelegate {
     func sendDataToMenuViewController(data: MenuItemModel) {
         brain.addToCart(dish: data)
+        configureCartButton()
     }
 }
 
