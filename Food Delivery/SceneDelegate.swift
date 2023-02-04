@@ -17,9 +17,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
-        guard let navController = window?.rootViewController as? UINavigationController else { fatalError("Could not typecast to UINavigationController") }
-        guard let menuViewController = navController.topViewController as? MenuViewController else { fatalError("Could not typecast to ManuViewController") }
-        menuViewController.brain = MenuBrain()
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+        
+        if UserDefaults.standard.bool(forKey: "IsLoggedIn"){
+            //if user is logged in
+            
+            guard let navController = mainStoryboard.instantiateViewController(withIdentifier: "mainController") as? UINavigationController else {
+                fatalError("Could not typecast to UINavigationController")
+            }
+            guard let menuViewController = navController.topViewController as? MenuViewController else { fatalError("Could not typecast to ManuViewController") }
+            menuViewController.brain = MenuBrain()
+            window?.rootViewController = navController
+        } else {
+            // if user isn't logged in
+            
+            guard let logInController = mainStoryboard.instantiateViewController(withIdentifier: "loginViewController") as? LoginViewController else {
+                fatalError("Could not typecast to LoginViewController")
+            }
+            window?.rootViewController = logInController
+        }
+        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
