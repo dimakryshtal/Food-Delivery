@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol DataSendingDelegate {
     func sendDataToMenuViewController(data: MenuItemModel)
@@ -36,18 +37,19 @@ class MenuViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-                
-
-
-        navigationController?.isNavigationBarHidden = true
+    @IBAction func profileButtonTapped(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
+        
     }
     
     @IBAction func cartButtonTapped(_ sender: Any) {
         guard brain.getCurrentOrder().count != 0 else {
             let alert = UIAlertController(title: "Alert", message: "Your cart must contain at least one dish.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
@@ -67,7 +69,7 @@ extension MenuViewController {
             case 2:
                 return MenuViewLayout.shared.menuLayout()
             default:
-                return MenuViewLayout.shared.promosLayout()
+                return nil
             }
         }
 

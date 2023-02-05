@@ -98,8 +98,8 @@ extension OrderViewController {
         let collectionViewHeight = collectionView.frame.height
         let newHeight = CGFloat(110 * menuBrain.getCurrentOrder().count)
         
-        collectionViewHeightConstraint = collectionView.heightAnchor.constraint(equalToConstant:
-                                                                                    newHeight > collectionViewHeight ? collectionViewHeight : newHeight)
+        collectionViewHeightConstraint = collectionView.heightAnchor.constraint(equalToConstant: newHeight)
+//                                                                                    newHeight > collectionViewHeight ? collectionViewHeight : newHeight)
     }
 }
 

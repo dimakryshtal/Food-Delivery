@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -18,29 +19,16 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        guard let window = UIApplication.shared.windows.first else {
-            return
+
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) {authresult, error in
+            if let err = error {
+                let alert = UIAlertController(title: "Error", message: err.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-        
-        UserDefaults.standard.set(true, forKey: "IsLoggedIn")
-        
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let navController = mainStoryboard.instantiateViewController(withIdentifier: "mainController") as! UINavigationController
-        guard let menuViewController = navController.topViewController as? MenuViewController else { fatalError("Could not typecast to ManuViewController") }
-        menuViewController.brain = MenuBrain()
-        
-        window.rootViewController = navController
-        window.makeKeyAndVisible()
-        
-        let options: UIView.AnimationOptions = .transitionCrossDissolve
-
-        // The duration of the transition animation, measured in seconds.
-        let duration: TimeInterval = 0.3
-
-        UIView.transition(with: window, duration: duration, options: options, animations: {}, completion: nil)
-
     }
-
-    @IBAction func signinButtonTapped(_ sender: Any) {
-    }
+    
 }

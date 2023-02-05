@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C603A5A6297C0EF100F53058 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603A5A5297C0EF100F53058 /* OrderViewController.swift */; };
 		C604BDC82971C779005A1709 /* PromoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604BDC72971C779005A1709 /* PromoModel.swift */; };
+		C60DA0FA298EE9ED00087C2C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60DA0F9298EE9ED00087C2C /* SignUpViewController.swift */; };
 		C63D2FEF2976D12900EDEEA4 /* MenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D2FEE2976D12900EDEEA4 /* MenuHeader.swift */; };
 		C656CAF929888B0600E3CF30 /* UITextView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656CAF829888B0600E3CF30 /* UITextView + Extension.swift */; };
 		C6696BDD29855C5600CA829E /* OrderItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6696BDC29855C5600CA829E /* OrderItemModel.swift */; };
@@ -25,6 +26,7 @@
 		C696421C2971C15C008C3FED /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696421B2971C15C008C3FED /* UIView + Extension.swift */; };
 		C69744FA2982BC3200D65A6D /* MenuBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69744F92982BC3200D65A6D /* MenuBrain.swift */; };
 		C69E76F829800D8E00B7D49B /* OrderDishCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E76F729800D8E00B7D49B /* OrderDishCollectionViewCell.swift */; };
+		C6A0BA6D298FC3BC00A3E738 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A0BA6C298FC3BC00A3E738 /* HelperFunctions.swift */; };
 		C6AA1715297EC23600B70E46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6AA1714297EC23600B70E46 /* GoogleService-Info.plist */; };
 		C6AA1718297EDEFA00B70E46 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C6AA1717297EDEFA00B70E46 /* FirebaseAnalyticsSwift */; };
 		C6AA171A297EDEFA00B70E46 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C6AA1719297EDEFA00B70E46 /* FirebaseAuth */; };
@@ -47,6 +49,7 @@
 /* Begin PBXFileReference section */
 		C603A5A5297C0EF100F53058 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		C604BDC72971C779005A1709 /* PromoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoModel.swift; sourceTree = "<group>"; };
+		C60DA0F9298EE9ED00087C2C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C63D2FEE2976D12900EDEEA4 /* MenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeader.swift; sourceTree = "<group>"; };
 		C656CAF829888B0600E3CF30 /* UITextView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView + Extension.swift"; sourceTree = "<group>"; };
 		C6696BDC29855C5600CA829E /* OrderItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemModel.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		C696421B2971C15C008C3FED /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		C69744F92982BC3200D65A6D /* MenuBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBrain.swift; sourceTree = "<group>"; };
 		C69E76F729800D8E00B7D49B /* OrderDishCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDishCollectionViewCell.swift; sourceTree = "<group>"; };
+		C6A0BA6C298FC3BC00A3E738 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		C6AA1714297EC23600B70E46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6AA1729297EE4D500B70E46 /* OrderViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewLayout.swift; sourceTree = "<group>"; };
 		C6AD59BE297D50780051B5DA /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 		C67E6515298EBB7B00EAAF58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C6A0BA6C298FC3BC00A3E738 /* HelperFunctions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				C603A5A5297C0EF100F53058 /* OrderViewController.swift */,
 				C6AD59BE297D50780051B5DA /* FoodDetailsViewController.swift */,
 				C67E6513298E960000EAAF58 /* LoginViewController.swift */,
+				C60DA0F9298EE9ED00087C2C /* SignUpViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -309,6 +315,7 @@
 				C604BDC82971C779005A1709 /* PromoModel.swift in Sources */,
 				C63D2FEF2976D12900EDEEA4 /* MenuHeader.swift in Sources */,
 				C6CBAECC29733470008164F8 /* FoodCategoryModel.swift in Sources */,
+				C60DA0FA298EE9ED00087C2C /* SignUpViewController.swift in Sources */,
 				C6B8475029741B2200613C1E /* UIImageView + Extension.swift in Sources */,
 				C6B7FF8729759D51001728AE /* K.swift in Sources */,
 				C6AD59BF297D50780051B5DA /* FoodDetailsViewController.swift in Sources */,
@@ -319,6 +326,7 @@
 				C68F0C5929746D01007A0F3A /* MenuCollectionViewCell.swift in Sources */,
 				C6AA172A297EE4D500B70E46 /* OrderViewLayout.swift in Sources */,
 				C696421C2971C15C008C3FED /* UIView + Extension.swift in Sources */,
+				C6A0BA6D298FC3BC00A3E738 /* HelperFunctions.swift in Sources */,
 				C603A5A6297C0EF100F53058 /* OrderViewController.swift in Sources */,
 				C68D42F12971ABB300FB7A9D /* SceneDelegate.swift in Sources */,
 				C6CBAECA2973343F008164F8 /* FoodCategoryCollectionViewCell.swift in Sources */,

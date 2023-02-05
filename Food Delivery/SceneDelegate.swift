@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    var window: UIWindow?
+    var window: UIWindow!
     
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,26 +19,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        
+        
+        
+        Auth.auth().addStateDidChangeListener() { (auth, firebaseUser) in
+            if let firebaseUser {
+                //if user is logged in
+                guard let navController = mainStoryboard.instantiateViewController(withIdentifier: "mainController") as? UINavigationController else {
+                    fatalError("Could not typecast to UINavigationController")
+                }
+                guard let menuViewController = navController.topViewController as? MenuViewController else { fatalError("Could not typecast to ManuViewController") }
+                menuViewController.brain = MenuBrain()
+                self.window.rootViewController = navController
+            } else {
+                // if user isn't logged in
+                guard let logInController = mainStoryboard.instantiateViewController(withIdentifier: "loginViewController") as? LoginViewController else {
+                    fatalError("Could not typecast to LoginViewController")
+                }
+                self.window.rootViewController = logInController
+            }
+            self.window.makeKeyAndVisible()
 
-        
-        if UserDefaults.standard.bool(forKey: "IsLoggedIn"){
-            //if user is logged in
-            
-            guard let navController = mainStoryboard.instantiateViewController(withIdentifier: "mainController") as? UINavigationController else {
-                fatalError("Could not typecast to UINavigationController")
-            }
-            guard let menuViewController = navController.topViewController as? MenuViewController else { fatalError("Could not typecast to ManuViewController") }
-            menuViewController.brain = MenuBrain()
-            window?.rootViewController = navController
-        } else {
-            // if user isn't logged in
-            
-            guard let logInController = mainStoryboard.instantiateViewController(withIdentifier: "loginViewController") as? LoginViewController else {
-                fatalError("Could not typecast to LoginViewController")
-            }
-            window?.rootViewController = logInController
+            UIView.transition(with: self.window, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: nil)
         }
-        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -45,6 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        UserDefaults.standard.set(false, forKey: "IsLoggedIn")
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
