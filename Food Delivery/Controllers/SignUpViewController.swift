@@ -19,6 +19,14 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         configureTextFields()
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        firstNameTextField.text = "test"
+        lastNameTextField.text = "test"
+        emailTextField.text = "test@gmail.com"
+        passwordTextField.text = "123456"
     }
     
     
@@ -26,11 +34,18 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let err = error {
-                let alert = UIAlertController(title: "Error", message: err.localizedDescription, preferredStyle: .alert)
+        Auth.auth().createUser(withEmail: email, password: password) {[weak self] authResult, error in
+            guard let authResult, error == nil else {
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self?.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if let firstName = self?.firstNameTextField.text, let lastName = self?.lastNameTextField.text {
+                UserDefaults.standard.set(firstName, forKey: "firstName")
+                UserDefaults.standard.set(lastName, forKey: "lastName")
+                FirestoreManager.shared.createUserInDB(userID: authResult.user.uid, firstName: firstName, lastName: lastName)
             }
         }
     }

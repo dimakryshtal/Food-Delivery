@@ -13,6 +13,11 @@ protocol OrderDishCellDelegate: AnyObject {
     func removeCell(dish: OrderItemModel)
 }
 
+protocol UpdateMapViewDelegate {
+    func updateMapView(locationCoordinate: CLLocationCoordinate2D)
+    func updateLocationView(locationCoordinate: CLLocationCoordinate2D)
+}
+
 
 class OrderViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
@@ -25,7 +30,7 @@ class OrderViewController: UIViewController {
     var locationManager = CLLocationManager()
     var mapViewOpened = false
     
-    var mapViewDefaultConstraints: [NSLayoutConstraint]?
+//    var mapViewDefaultConstraints: [NSLayoutConstraint]?
     var collectionViewHeightConstraint: NSLayoutConstraint? {
         didSet {
             if let oldValue {
@@ -63,10 +68,9 @@ class OrderViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = false
+        
+        
     }
-    
-    
-
     
     @IBAction func orderTapped(_ sender: Any) {
     }
@@ -81,7 +85,7 @@ extension OrderViewController {
         mapView.layer.cornerRadius = 30
         mapView.isScrollEnabled = false
         
-        mapViewDefaultConstraints = view.getConstraints(to: mapView) + mapView.constraints
+//        mapViewDefaultConstraints = view.getConstraints(to: mapView) + mapView.constraints
     }
     
     func configureTextFields() {
@@ -90,6 +94,11 @@ extension OrderViewController {
 
         locationView.leftView = UIImageView.createImageViewForTextField(with: "location.fill")
         nameView.leftView = UIImageView.createImageViewForTextField(with: "person.fill")
+        
+        let firstName = UserDefaults.standard.string(forKey: "firstName") ?? ""
+        let lastName = UserDefaults.standard.string(forKey: "lastName") ?? ""
+        
+        nameView.text = "\(firstName == "" ? "" : firstName + " ")\(lastName)"
     }
     
     func configureCollectionView() {
@@ -110,46 +119,15 @@ extension OrderViewController {
         let tapMapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMap))
         mapView.addGestureRecognizer(tapMapGesture)
         
-        let longMapGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressMap(_:)))
-        mapView.addGestureRecognizer(longMapGesture)
-        
         let tapLocationGesture = UITapGestureRecognizer(target: self, action: #selector(didTapLocation))
         locationView.leftView?.addGestureRecognizer(tapLocationGesture)
     }
     
     @objc func didTapMap() {
-        let constraintsToDeactivate = view.getConstraints(to: mapView)
-        NSLayoutConstraint.deactivate(mapView.constraints + constraintsToDeactivate)
-        
-        if mapViewOpened {
-            NSLayoutConstraint.activate(mapViewDefaultConstraints!)
-        } else {
-            mapView.setConstraints(to: view)
-        }
-        UIView.animate(withDuration: 0.5) { [weak self] in
-            self?.navigationController?.isNavigationBarHidden.toggle()
-            self?.view.layoutIfNeeded()
-        }
-        mapView.isScrollEnabled.toggle()
-        mapViewOpened.toggle()
-    }
-    
-    @objc func didLongPressMap(_ sender: UITapGestureRecognizer? = nil) {
-        if sender?.state == UIGestureRecognizer.State.ended {
-            mapView.removeAnnotations(mapView.annotations)
-            guard let touchLocation = sender?.location(in: mapView) else { return }
-            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-            let pin = MKPlacemark(coordinate: locationCoordinate)
-            let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
-            mapView.setRegion(coordinateRegion, animated: true)
-            mapView.addAnnotation(pin)
-        }
-        
+        performSegue(withIdentifier: "presentMapView", sender: mapView)
     }
     
     @objc func didTapLocation() {
-        
-        
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }
@@ -215,6 +193,20 @@ extension OrderViewController: OrderDishCellDelegate {
     }
 }
 
+//MARK: - Segues
+
+extension OrderViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "presentMapView" {
+            guard let vc = segue.destination as? MapViewController else {
+                fatalError("Could not typecast to MapViewController")
+            }
+            
+            vc.delegate = self
+        }
+    }
+}
+
 //MARK: - Location Manager Delegate
 
 extension OrderViewController: CLLocationManagerDelegate {
@@ -227,21 +219,40 @@ extension OrderViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print("called")
+        print("called")
         if let location = locations.last {
             locationManager.stopUpdatingHeading()
-//            let lat = location.coordinate.latitude
-//            let lon = location.coordinate.longitude
-//            print(lat, lon)
-            
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            print(lat, lon)
             
             
             CLGeocoder().reverseGeocodeLocation(location, preferredLocale: Locale(languageCode: .english)) { places, _ in
-                print(places)
+                let place = places?.last
+                self.locationView.text = place?.name
             }
         }
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+}
+
+extension OrderViewController: UpdateMapViewDelegate {
+    func updateMapView(locationCoordinate: CLLocationCoordinate2D) {
+        let pin = MKPointAnnotation()
+        pin.coordinate = locationCoordinate
+        let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
+        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.addAnnotation(pin)
+        
+    }
+    
+    func updateLocationView(locationCoordinate: CLLocationCoordinate2D) {
+        let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location, preferredLocale: Locale(languageCode: .english)) { places, _ in
+            let place = places?.last
+            self.locationView.text = place?.name
+        }
     }
 }

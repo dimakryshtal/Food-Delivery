@@ -262,7 +262,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="lgR-Ah-gcb"/>
                                         </constraints>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="secondaryColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -277,7 +277,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="aUW-Xq-gUg"/>
                                         </constraints>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="secondaryColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -328,11 +328,43 @@
                         <outlet property="locationView" destination="jd6-fk-cmG" id="fx0-zG-hJz"/>
                         <outlet property="mapView" destination="HN1-tY-x50" id="ND8-gu-RV0"/>
                         <outlet property="nameView" destination="CRv-1B-doO" id="KbF-6J-1WS"/>
+                        <segue destination="ho8-Fg-9g0" kind="show" identifier="presentMapView" id="Fjm-vM-Afs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQu-TJ-SHE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1470.9923664122136" y="464.08450704225356"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="tol-7e-RAa">
+            <objects>
+                <viewController id="ho8-Fg-9g0" customClass="MapViewController" customModule="Food_Delivery" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xyH-2q-4Nl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIT-4o-c5g">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qcr-A1-Z8M"/>
+                        <color key="backgroundColor" name="mainColor"/>
+                        <constraints>
+                            <constraint firstItem="Qcr-A1-Z8M" firstAttribute="trailing" secondItem="fIT-4o-c5g" secondAttribute="trailing" id="LT0-dE-CJ5"/>
+                            <constraint firstItem="Qcr-A1-Z8M" firstAttribute="bottom" secondItem="fIT-4o-c5g" secondAttribute="bottom" id="TCe-gA-9d6"/>
+                            <constraint firstItem="fIT-4o-c5g" firstAttribute="top" secondItem="Qcr-A1-Z8M" secondAttribute="top" id="VHf-Hj-3D7"/>
+                            <constraint firstItem="fIT-4o-c5g" firstAttribute="leading" secondItem="Qcr-A1-Z8M" secondAttribute="leading" id="xTy-B8-Lre"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ItW-6G-bnM"/>
+                    <connections>
+                        <outlet property="mapView" destination="fIT-4o-c5g" id="DRf-Ks-5Of"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vJb-gK-fbJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2422" y="464"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="KK4-kN-PhS">
