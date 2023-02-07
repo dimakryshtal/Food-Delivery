@@ -34,7 +34,7 @@ class FoodDetailsViewController: UIViewController {
         
         foodLabel.text = cellData?.title
         
-        foodImage.image = UIImage(named: cellData?.img ?? "")
+        foodImage.image = UIImage(named: cellData?.image ?? "")
         foodImage.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         foodIngredientsLabel.text = cellData?.description

@@ -16,6 +16,7 @@
 		C656CAF929888B0600E3CF30 /* UITextView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656CAF829888B0600E3CF30 /* UITextView + Extension.swift */; };
 		C6696BDD29855C5600CA829E /* OrderItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6696BDC29855C5600CA829E /* OrderItemModel.swift */; };
 		C67E6514298E960000EAAF58 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E6513298E960000EAAF58 /* LoginViewController.swift */; };
+		C68018E429927B34006C8F32 /* FireStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68018E329927B34006C8F32 /* FireStorageManager.swift */; };
 		C68D42EF2971ABB300FB7A9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D42EE2971ABB300FB7A9D /* AppDelegate.swift */; };
 		C68D42F12971ABB300FB7A9D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D42F02971ABB300FB7A9D /* SceneDelegate.swift */; };
 		C68D42F32971ABB300FB7A9D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D42F22971ABB300FB7A9D /* MenuViewController.swift */; };
@@ -58,6 +59,7 @@
 		C656CAF829888B0600E3CF30 /* UITextView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView + Extension.swift"; sourceTree = "<group>"; };
 		C6696BDC29855C5600CA829E /* OrderItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemModel.swift; sourceTree = "<group>"; };
 		C67E6513298E960000EAAF58 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C68018E329927B34006C8F32 /* FireStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStorageManager.swift; sourceTree = "<group>"; };
 		C68D42EB2971ABB300FB7A9D /* Food Delivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Delivery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68D42EE2971ABB300FB7A9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C68D42F02971ABB300FB7A9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				C6A0BA6C298FC3BC00A3E738 /* HelperFunctions.swift */,
 				C645E85129912A8800ADD66A /* FirestoreManager.swift */,
+				C68018E329927B34006C8F32 /* FireStorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				C68D42EF2971ABB300FB7A9D /* AppDelegate.swift in Sources */,
 				C6696BDD29855C5600CA829E /* OrderItemModel.swift in Sources */,
 				C68F0C5929746D01007A0F3A /* MenuCollectionViewCell.swift in Sources */,
+				C68018E429927B34006C8F32 /* FireStorageManager.swift in Sources */,
 				C6AA172A297EE4D500B70E46 /* OrderViewLayout.swift in Sources */,
 				C645E85229912A8800ADD66A /* FirestoreManager.swift in Sources */,
 				C696421C2971C15C008C3FED /* UIView + Extension.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OrderItemModel: Hashable {
+class OrderItemModel: Hashable, Codable{
     
     var menuItem: MenuItemModel
     var amount: Int

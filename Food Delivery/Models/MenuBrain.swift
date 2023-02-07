@@ -10,16 +10,30 @@ import Foundation
 class MenuBrain {
     private var currentOrder: Set<OrderItemModel> = []
     
-    private var foodData: [MenuItemModel]
+    private var foodData: [MenuItemModel] = []
     private var promoData: [PromoModel]
     private var categories: [FoodCategoryModel]
+    private var delegate: MenuBrainDelegate?
     
     var selectedCategoryItem: FoodTypes = .pizza
     
     init() {
-        foodData = MenuItemModel.mockData
         promoData = PromoModel.mockData
         categories = FoodCategoryModel.mockData
+        loadData()
+    }
+    
+    func loadData() {
+        FirestoreManager.shared.getAllDishes { menu in
+            self.foodData = menu
+            DispatchQueue.main.async {
+                self.delegate?.updateData()
+            }
+        }
+    }
+    
+    func setDelegate(delegate: MenuBrainDelegate) {
+        self.delegate = delegate
     }
     
     func addToCart(dish: MenuItemModel) {

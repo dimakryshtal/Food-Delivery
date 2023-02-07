@@ -73,6 +73,7 @@ class OrderViewController: UIViewController {
     }
     
     @IBAction func orderTapped(_ sender: Any) {
+        FirestoreManager.shared.createNewOrder(order: menuBrain.getCurrentOrder())
     }
 
 }

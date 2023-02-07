@@ -19,7 +19,12 @@ class MenuCollectionViewCell: UICollectionViewCell {
             titleLabel.text = cellData.title
             descriptionLabel.text = cellData.description
             priceLabel.text = "\(cellData.price)$"
-            foodImage.image = UIImage(named: cellData.img)
+            foodImage.image = nil
+            FireStorageManager.shared.getPicture(imageTitle: cellData.image) { image in
+                DispatchQueue.main.async {
+                    self.foodImage.image = image
+                }
+            }
         }
     }
     
@@ -47,7 +52,6 @@ class MenuCollectionViewCell: UICollectionViewCell {
     }()
     var foodImage: UIImageView = {
         var iv = UIImageView()
-        iv.backgroundColor = .red
         iv.layer.cornerRadius = 10
         
         return iv

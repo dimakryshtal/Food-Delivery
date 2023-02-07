@@ -12,6 +12,10 @@ protocol DataSendingDelegate {
     func sendDataToMenuViewController(data: MenuItemModel)
 }
 
+protocol MenuBrainDelegate {
+    func updateData()
+}
+
 class MenuViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var cartButton: UIButton!
@@ -23,6 +27,11 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        FirestoreManager.shared.getAllDishes { menu in
+            print(menu)
+        }
+        
+        brain.setDelegate(delegate: self)
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
@@ -215,6 +224,16 @@ extension MenuViewController: DataSendingDelegate {
         brain.addToCart(dish: data)
         configureCartButton()
     }
+}
+
+//MARK: - MenuBrainDelegate
+
+extension MenuViewController: MenuBrainDelegate {
+    func updateData() {
+        applySnapshot()
+    }
+    
+    
 }
 
 
