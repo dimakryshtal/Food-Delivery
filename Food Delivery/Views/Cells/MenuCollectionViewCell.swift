@@ -15,7 +15,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
     
     var cellData : MenuItemModel? {
         didSet {
-            guard let cellData = cellData else {return}
+            guard let cellData = cellData?.data else {return}
             titleLabel.text = cellData.title
             descriptionLabel.text = cellData.description
             priceLabel.text = "\(cellData.price)$"

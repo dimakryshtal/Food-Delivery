@@ -25,9 +25,6 @@ extension FirestoreManager {
         let jsonEncoder = JSONEncoder()
         do {
             let jsonResultData = try jsonEncoder.encode(OrderItemModel.mockData[0])
-//            print(String(data: jsonResultData, encoding: .utf8)!)
-//            db.collection("orders").addDocument(data: ["userID": Auth.auth().currentUser?.uid,
-//                                                       "orderList": jsonResultData])
             try db.collection("orders").document().setData(from: ["orderList": Array(order)])
             
         } catch {
@@ -46,13 +43,14 @@ extension FirestoreManager {
             }
 
             let menu: [MenuItemModel] = query!.documents.map { document in
+                
                 do {
-                    let menuItem = try document.data(as: MenuItemModel.self)
-                    return menuItem
+                    let menuItem = try document.data(as: MenuItemData.self)
+                    return MenuItemModel(id: document.documentID, data: menuItem)
                 } catch {
                     print(error)
                 }
-                return MenuItemModel(title: "", type: .burger, description: "", price: 0, image: "")
+                return MenuItemModel(id: "0", data: MenuItemData(title: "", type: .burger, description: "", price: 0, image: ""))
             }
             completion(menu)
 

@@ -27,6 +27,7 @@ class MenuBrain {
         FirestoreManager.shared.getAllDishes { menu in
             self.foodData = menu
             DispatchQueue.main.async {
+                print(menu)
                 self.delegate?.updateData()
             }
         }
@@ -36,17 +37,16 @@ class MenuBrain {
         self.delegate = delegate
     }
     
-    func addToCart(dish: MenuItemModel) {
-        currentOrder.insert(OrderItemModel(menuItem: dish, amount: 1))
+    func addToCart(itemID: String) {
+        currentOrder.insert(OrderItemModel(itemID: itemID, amount: 1))
     }
     func removeFromCart(dish: OrderItemModel) {
         currentOrder.remove(dish)
     }
     
-    func checkIfOrderContains(dish: MenuItemModel) -> Bool {
-        return currentOrder.contains(OrderItemModel(menuItem: dish, amount: 1))
+    func checkIfOrderContains(itemID: String) -> Bool {
+        return currentOrder.contains(OrderItemModel(itemID: itemID, amount: 1))
     }
-    
     
 }
 
@@ -66,4 +66,11 @@ extension MenuBrain {
     func getCurrentOrder() -> Set<OrderItemModel> {
         return currentOrder
     }
+    
+    func getItemById(itemID: String) -> MenuItemModel? {
+        return foodData.first { itemModel in
+            itemModel.id == itemID
+        }
+    }
+    
 }

@@ -15,7 +15,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        configureTextFields()
+        hideKeyboardWhenTappedAround()
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -31,4 +35,28 @@ class LoginViewController: UIViewController {
         }
     }
     
+}
+
+//MARK: - Configure views
+
+extension LoginViewController {
+    func configureTextFields() {
+        emailTextField.leftViewMode = .always
+        passwordTextField.leftViewMode = .always
+        
+        emailTextField.leftView = UIImageView.createImageViewForTextField(with: "envelope")
+        passwordTextField.leftView = UIImageView.createImageViewForTextField(with: "lock")
+        
+    }
+}
+
+
+
+//MARK: - TextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 }

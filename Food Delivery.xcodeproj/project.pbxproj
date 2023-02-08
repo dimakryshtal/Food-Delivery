@@ -10,6 +10,7 @@
 		C603A5A6297C0EF100F53058 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603A5A5297C0EF100F53058 /* OrderViewController.swift */; };
 		C604BDC82971C779005A1709 /* PromoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C604BDC72971C779005A1709 /* PromoModel.swift */; };
 		C60DA0FA298EE9ED00087C2C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60DA0F9298EE9ED00087C2C /* SignUpViewController.swift */; };
+		C62D3BFB2993FF2100B4E066 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62D3BFA2993FF2100B4E066 /* UIViewController + Extension.swift */; };
 		C63D2FEF2976D12900EDEEA4 /* MenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D2FEE2976D12900EDEEA4 /* MenuHeader.swift */; };
 		C645E85229912A8800ADD66A /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C645E85129912A8800ADD66A /* FirestoreManager.swift */; };
 		C645E854299152C900ADD66A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C645E853299152C900ADD66A /* MapViewController.swift */; };
@@ -24,7 +25,7 @@
 		C68D42F82971ABB400FB7A9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C68D42F72971ABB400FB7A9D /* Assets.xcassets */; };
 		C68D42FB2971ABB400FB7A9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C68D42F92971ABB400FB7A9D /* LaunchScreen.storyboard */; };
 		C68F0C5929746D01007A0F3A /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68F0C5829746D01007A0F3A /* MenuCollectionViewCell.swift */; };
-		C68F0C5B29746D5F007A0F3A /* MenuItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68F0C5A29746D5F007A0F3A /* MenuItemModel.swift */; };
+		C68F0C5B29746D5F007A0F3A /* MenuItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68F0C5A29746D5F007A0F3A /* MenuItemData.swift */; };
 		C6929FB62971BE24008A0080 /* PromoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6929FB52971BE24008A0080 /* PromoCollectionViewCell.swift */; };
 		C696421C2971C15C008C3FED /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696421B2971C15C008C3FED /* UIView + Extension.swift */; };
 		C69744FA2982BC3200D65A6D /* MenuBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69744F92982BC3200D65A6D /* MenuBrain.swift */; };
@@ -53,6 +54,7 @@
 		C603A5A5297C0EF100F53058 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		C604BDC72971C779005A1709 /* PromoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoModel.swift; sourceTree = "<group>"; };
 		C60DA0F9298EE9ED00087C2C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C62D3BFA2993FF2100B4E066 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		C63D2FEE2976D12900EDEEA4 /* MenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeader.swift; sourceTree = "<group>"; };
 		C645E85129912A8800ADD66A /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		C645E853299152C900ADD66A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +71,7 @@
 		C68D42FA2971ABB400FB7A9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C68D42FC2971ABB400FB7A9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C68F0C5829746D01007A0F3A /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		C68F0C5A29746D5F007A0F3A /* MenuItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemModel.swift; sourceTree = "<group>"; };
+		C68F0C5A29746D5F007A0F3A /* MenuItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemData.swift; sourceTree = "<group>"; };
 		C6929FB52971BE24008A0080 /* PromoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCollectionViewCell.swift; sourceTree = "<group>"; };
 		C696421B2971C15C008C3FED /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		C69744F92982BC3200D65A6D /* MenuBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBrain.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				C696421B2971C15C008C3FED /* UIView + Extension.swift */,
 				C6B8474F29741B2200613C1E /* UIImageView + Extension.swift */,
 				C656CAF829888B0600E3CF30 /* UITextView + Extension.swift */,
+				C62D3BFA2993FF2100B4E066 /* UIViewController + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,7 +229,7 @@
 			children = (
 				C604BDC72971C779005A1709 /* PromoModel.swift */,
 				C6CBAECB29733470008164F8 /* FoodCategoryModel.swift */,
-				C68F0C5A29746D5F007A0F3A /* MenuItemModel.swift */,
+				C68F0C5A29746D5F007A0F3A /* MenuItemData.swift */,
 				C6696BDC29855C5600CA829E /* OrderItemModel.swift */,
 			);
 			path = ItemModels;
@@ -328,6 +331,7 @@
 				C6B8475029741B2200613C1E /* UIImageView + Extension.swift in Sources */,
 				C6B7FF8729759D51001728AE /* K.swift in Sources */,
 				C6AD59BF297D50780051B5DA /* FoodDetailsViewController.swift in Sources */,
+				C62D3BFB2993FF2100B4E066 /* UIViewController + Extension.swift in Sources */,
 				C6C5CCFF2971B5070091E84E /* MenuViewLayout.swift in Sources */,
 				C67E6514298E960000EAAF58 /* LoginViewController.swift in Sources */,
 				C68D42EF2971ABB300FB7A9D /* AppDelegate.swift in Sources */,
@@ -342,7 +346,7 @@
 				C603A5A6297C0EF100F53058 /* OrderViewController.swift in Sources */,
 				C68D42F12971ABB300FB7A9D /* SceneDelegate.swift in Sources */,
 				C6CBAECA2973343F008164F8 /* FoodCategoryCollectionViewCell.swift in Sources */,
-				C68F0C5B29746D5F007A0F3A /* MenuItemModel.swift in Sources */,
+				C68F0C5B29746D5F007A0F3A /* MenuItemData.swift in Sources */,
 				C656CAF929888B0600E3CF30 /* UITextView + Extension.swift in Sources */,
 				C69E76F829800D8E00B7D49B /* OrderDishCollectionViewCell.swift in Sources */,
 			);
@@ -494,11 +498,14 @@
 				DEVELOPMENT_TEAM = HRS8A783WL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Food Delivery/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "You need to allow us to use location services in order to know where you are";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -522,11 +529,14 @@
 				DEVELOPMENT_TEAM = HRS8A783WL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Food Delivery/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "You need to allow us to use location services in order to know where you are";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

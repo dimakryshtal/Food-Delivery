@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 
 protocol DataSendingDelegate {
-    func sendDataToMenuViewController(data: MenuItemModel)
+    func addToCart(itemID: String)
 }
 
 protocol MenuBrainDelegate {
@@ -32,6 +32,7 @@ class MenuViewController: UIViewController {
         }
         
         brain.setDelegate(delegate: self)
+        
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
         collectionView.register(PromoCollectionViewCell.self, forCellWithReuseIdentifier: PromoCollectionViewCell.cellIdentifier)
@@ -44,6 +45,9 @@ class MenuViewController: UIViewController {
         
         collectionView.selectItem(at: IndexPath(item: 0, section: 1), animated: false, scrollPosition: [])
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        configureCartButton()
     }
     
     @IBAction func profileButtonTapped(_ sender: Any) {
@@ -144,7 +148,7 @@ extension MenuViewController {
         snapshot.appendItems(brain.getCategories(), toSection: .category)
         
         let currentData = brain.getFoodData().filter { menuItem in
-            menuItem.type == brain.selectedCategoryItem
+            menuItem.data.type == brain.selectedCategoryItem
         }
         
         snapshot.appendSections([.menu(foodType: brain.selectedCategoryItem)])
@@ -205,8 +209,8 @@ extension MenuViewController {
                 fatalError("Cannot typecast to MenuCollectionViewCell")
             }
             
-            vc.cellData = cellData
-            vc.isAlreadyChosen = brain.checkIfOrderContains(dish: cellData)
+            vc.item = cellData
+            vc.isAlreadyChosen = brain.checkIfOrderContains(itemID: cellData.id)
             vc.delegate = self
             
         } else if segue.identifier == "goToOrder" {
@@ -220,8 +224,8 @@ extension MenuViewController {
 }
 //MARK: - Chosen dish
 extension MenuViewController: DataSendingDelegate {
-    func sendDataToMenuViewController(data: MenuItemModel) {
-        brain.addToCart(dish: data)
+    func addToCart(itemID: String) {
+        brain.addToCart(itemID: itemID)
         configureCartButton()
     }
 }
@@ -235,5 +239,3 @@ extension MenuViewController: MenuBrainDelegate {
     
     
 }
-
-

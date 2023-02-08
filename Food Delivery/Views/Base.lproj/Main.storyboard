@@ -400,6 +400,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Mfo-R3-gku"/>
                                 </constraints>
+                                <color key="textColor" name="secondaryColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -414,6 +415,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="K4A-No-NEz"/>
                                 </constraints>
+                                <color key="textColor" name="secondaryColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>

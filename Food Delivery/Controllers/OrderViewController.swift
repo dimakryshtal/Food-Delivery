@@ -164,6 +164,7 @@ extension OrderViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderDishCollectionViewCell.cellIdentifier,
                                                               for: indexPath) as? OrderDishCollectionViewCell
                 cell?.orderData = order
+                cell?.cellData = self?.menuBrain.getItemById(itemID: order.itemID)
                 cell?.delegate = self
                 cell?.indexPath = indexPath
                 return cell
@@ -190,6 +191,10 @@ extension OrderViewController: OrderDishCellDelegate {
         configureCollectionView()
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
+        }
+        print(menuBrain.getCurrentOrder())
+        if menuBrain.getCurrentOrder().isEmpty {
+            navigationController?.popViewController(animated: true)
         }
     }
 }

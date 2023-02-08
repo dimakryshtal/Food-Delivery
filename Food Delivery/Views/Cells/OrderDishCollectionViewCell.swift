@@ -42,7 +42,7 @@ class OrderDishCollectionViewCell: MenuCollectionViewCell {
     var orderData: OrderItemModel? {
         didSet {
             guard let orderData else { return }
-            cellData = orderData.menuItem
+//            cellData = orderData.menuItem
             countLabel.text = String(orderData.amount)
             
         }

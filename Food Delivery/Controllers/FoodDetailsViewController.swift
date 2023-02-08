@@ -20,7 +20,7 @@ class FoodDetailsViewController: UIViewController {
     var isAlreadyChosen: Bool = false
     
     
-    var cellData: MenuItemModel!
+    var item: MenuItemModel!
     var delegate: DataSendingDelegate?
     
     deinit {
@@ -32,17 +32,21 @@ class FoodDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        foodLabel.text = cellData?.title
+        foodLabel.text = item.data.title
         
-        foodImage.image = UIImage(named: cellData?.image ?? "")
+        FireStorageManager.shared.getPicture(imageTitle: item.data.image) { image in
+            DispatchQueue.main.async {
+                self.foodImage.image = image
+            }
+        }
         foodImage.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
-        foodIngredientsLabel.text = cellData?.description
+        foodIngredientsLabel.text = item.data.description
     
         
         addToCartButton.isEnabled = !isAlreadyChosen
         addToCartButton.setImage(isAlreadyChosen ? nil : UIImage(systemName: "cart"), for: .normal)
-        addToCartButton.setTitle(isAlreadyChosen ? "The dish has already been chosen" : "Add to cart: \(cellData.price)$", for: .normal)
+        addToCartButton.setTitle(isAlreadyChosen ? "The dish has already been chosen" : "Add to cart: \(item.data.price)$", for: .normal)
         
         
         addToCartButton.setTitleColor(.white, for: .disabled)
@@ -52,8 +56,8 @@ class FoodDetailsViewController: UIViewController {
     
 
     @IBAction func addToCart(_ sender: UIButton) {
-        guard let cellData else {fatalError("Food details data is nil")}
-        delegate?.sendDataToMenuViewController(data: cellData)
+        guard let item else {fatalError("Food details data is nil")}
+        delegate?.addToCart(itemID: item.id)
         self.dismiss(animated: true)
     }
 }

@@ -9,18 +9,18 @@ import Foundation
 
 class OrderItemModel: Hashable, Codable{
     
-    var menuItem: MenuItemModel
+    var itemID: String
     var amount: Int
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(menuItem)
+        hasher.combine(itemID)
     }
     static func == (lhs: OrderItemModel, rhs: OrderItemModel) -> Bool {
-        return lhs.menuItem == rhs.menuItem
+        return lhs.itemID == rhs.itemID
     }
     
-    init(menuItem: MenuItemModel, amount: Int) {
-        self.menuItem = menuItem
+    init(itemID: String, amount: Int) {
+        self.itemID = itemID
         self.amount = amount
     }
     
@@ -33,7 +33,7 @@ class OrderItemModel: Hashable, Codable{
 
 extension OrderItemModel {
     static var mockData = [
-        OrderItemModel(menuItem: MenuItemModel.mockData[0], amount: 1)
+        OrderItemModel(itemID: "0", amount: 1)
     ]
 }
 
